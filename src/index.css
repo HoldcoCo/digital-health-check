@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 text-slate-100 font-sans antialiased;
+    /* Prevent the rubber-band scroll that makes a tablet quiz feel cheap. */
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Stops iOS from zooming when a form field is focused. */
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px;
+    font-family: inherit;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply relative mx-auto flex h-full w-full max-w-2xl flex-col overflow-hidden;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .glass-card {
+    @apply rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-white/10 bg-ink-900/70 px-4 py-3.5 text-base text-slate-100
+      placeholder:text-slate-500 outline-none transition
+      focus:border-brand-400/70 focus:ring-4 focus:ring-brand-500/20;
+  }
+
+  .primary-btn {
+    @apply relative flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r
+      from-brand-500 to-brand-400 px-6 py-4 text-base font-bold text-white shadow-glow
+      transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none;
+  }
+
+  .ghost-btn {
+    @apply flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold
+      text-slate-400 transition active:scale-95 hover:text-slate-200 disabled:opacity-30;
+  }
+}
+
+/* The aurora backdrop: two slow-moving blobs behind the frosted card. */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(59, 108, 246, 0.28), transparent 60%),
+    radial-gradient(90% 60% at 90% 110%, rgba(18, 201, 141, 0.18), transparent 60%),
+    #070b18;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
